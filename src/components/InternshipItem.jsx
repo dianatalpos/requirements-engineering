@@ -10,8 +10,9 @@ const InternshipItem = (props) => {
 
     <Card onClick={ onPress }>
         <Card.Body>
-            <Card.Title>{internship.description}</Card.Title>
-            <Card.Subtitle>{internship.domain}</Card.Subtitle>
+            <Card.Title>{internship.domain}</Card.Title>
+            <Card.Subtitle>{internship.creator}</Card.Subtitle>
+            <Card.Text>{internship.description}</Card.Text>
         </Card.Body>
     </Card>
     )

@@ -5,9 +5,15 @@ import LoginPage from './pages/LoginPage'
 import { AuthProvider } from "./contexts/AuthContext"
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import PrivateRoute from "./components/PrivateRoute"
+import AddInternshipPage from "./pages/AddInternshipPage";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import TbaPage from "./pages/TbaPage";
+import InternshipDetailPage from "./pages/InternshipDetailPage";
 
 function App() {
-  return (
+  return (<div>
+      <Header/>
       <Container className="d-flex align-items-center justify-content-center"
                style={{minHeight: "100vh"}}>
         <div className="w-100" style={{maxWidth: "400px"}}>
@@ -19,6 +25,11 @@ function App() {
               </Route>
               <Route path="/signup" element={<SignUpPage/>}/>
               <Route path="/login" element={<LoginPage/>}/>
+              <Route path="/add" element={<AddInternshipPage/>}/>
+              <Route path="/features" element={<TbaPage/>}/>
+              <Route path="/pricing" element={<TbaPage/>}/>
+              <Route path="/about" element={<TbaPage/>}/>
+              <Route path="/internship/*" element={<InternshipDetailPage/>}/>
             </Routes>
 
           </AuthProvider>
@@ -27,6 +38,8 @@ function App() {
           </Router>
        </div>
       </Container>
+          <Footer/>
+      </div>
   );
 }
 

@@ -1,17 +1,19 @@
 import React, {useEffect, useState} from 'react'
 import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
 import {firestore} from '../firebase'
-import { Spinner } from 'react-bootstrap';
+import { Spinner, Button } from 'react-bootstrap';
 import  InternshipList from '../components/InternshipList'
+import { Link, useNavigate } from 'react-router-dom'
 
 export default function InternshipsListPage() {
 
     const [internships,setInternships]=useState([])
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate()
 
     useEffect(() => {
         setLoading(true);
-        
+
         getData().then((docs) => {
 
             setInternships(docs);
@@ -22,6 +24,9 @@ export default function InternshipsListPage() {
 
     const onItemPressed = (item) => {
         console.log("Item is pressed", item);
+        console.log("is",item.id)
+        localStorage.setItem("iid",item.id)
+        navigate('/internship/'+item.id)
     }
 
     let getData = async () => {
@@ -46,17 +51,20 @@ export default function InternshipsListPage() {
     console.log(loading, internships)
 
     return (
-        <>
-    {loading ? <Spinner></Spinner> : 
-    
-        <InternshipList
-            internships={internships}
-            onItemPressed ={onItemPressed}
-            loading = {loading}
-        >
-        </InternshipList>
-    }
-
-        </>
+        <div>
+            <Button
+                variant="secondary"
+                href={"/add"}
+                style={{width: "100%"}}
+            >ADD INTERNSHIP</Button>
+            <p>  {' '}</p>
+            {loading ? <Spinner/> :
+                        <InternshipList
+                            internships={internships}
+                            onItemPressed={onItemPressed}
+                            loading={loading}
+                        />
+            }
+        </div>
     );
 }
